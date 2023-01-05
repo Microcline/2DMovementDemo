@@ -35,7 +35,7 @@ def main():
         action = handle_keys(key)
         move = action.get('move')
         exit = action.get('exit')
-        fullscreen = action.get('fullscreen')
+        fullscreen = action.get('fullscreen')  
 
         if move:
             deltaX, deltaY = move
