@@ -5,11 +5,23 @@ Date:
 import tcod as libtcod
 from input_handlers import handle_keys
 from entity import Entity
+from render_functions import render_all, clear_all
+from map_objects.game_map import GameMap
 
 def main():
     # Screen vars
     screen_width = 80
     screen_height = 50
+    map_width = 80
+    map_height = 45
+
+    # Console vars
+    con = libtcod.console_new(screen_width, screen_height)
+    game_map = GameMap(map_width, map_height)
+
+    colors = {'dark_wall': libtcod.Color(0, 0, 100),
+              'dark_ground': libtcod.Color(50, 50, 150)
+    }
 
     # Entity instantiation and dictionary tracking
     player  = Entity(1, 1, '@', libtcod.white)
@@ -28,9 +40,10 @@ def main():
     while not libtcod.console_is_window_closed():
         libtcod.sys_check_for_event(libtcod.EVENT_KEY_PRESS, key, mouse)
 
-        libtcod.console_set_default_foreground(0, libtcod.white)
-        libtcod.console_put_char(0, player.x, player.y, '@', libtcod.BKGND_NONE)
+        render_all(con, entities, game_map, screen_width, screen_height, colors)
         libtcod.console_flush()
+        libtcod.console_put_char(con, player.x, player.y, ' ', libtcod.BKGND_NONE)
+
         # Gather keypress
         action = handle_keys(key)
         move = action.get('move')
