@@ -18,6 +18,7 @@ def main():
     # Console vars
     con = libtcod.console_new(screen_width, screen_height)
     game_map = GameMap(map_width, map_height)
+    game_map.make_map()
 
     colors = {'dark_wall': libtcod.Color(0, 0, 100),
               'dark_ground': libtcod.Color(50, 50, 150)
