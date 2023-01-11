@@ -13,7 +13,7 @@ def main():
     screen_width = 80
     screen_height = 50
     map_width = 80 
-    map_height = 45
+    map_height = 45 
 
     # Console vars
     con = libtcod.console_new(screen_width, screen_height)
