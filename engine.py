@@ -42,8 +42,9 @@ def main():
 
         render_all(con, entities, game_map, screen_width, screen_height, colors)
         libtcod.console_flush()
-        libtcod.console_put_char(con, player.x, player.y, ' ', libtcod.BKGND_NONE)
-
+        #libtcod.console_put_char(con, player.x, player.y, ' ', libtcod.BKGND_NONE)
+        clear_all(con, entities)
+        
         # Gather keypress
         action = handle_keys(key)
         move = action.get('move')
@@ -52,7 +53,8 @@ def main():
 
         if move:
             deltaX, deltaY = move
-            player.move(deltaX, deltaY)
+            if not game_map.is_blocked(player.x + deltaX, player.y + deltaY):
+                player.move(deltaX, deltaY)
         if exit:
             return True
         if fullscreen:
